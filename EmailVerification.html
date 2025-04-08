@@ -97,7 +97,7 @@
 </head>
 <body>
   <div class="container">
-    <img src="https://yourapp.com/logo.png" alt="Voices Radio" class="logo">
+    <img src="https://voicesradio.co.uk/logo.png" alt="Voices Radio" class="logo">
     
     <!-- Loading State -->
     <div id="loading-state">
@@ -112,7 +112,7 @@
       <h1>Email Verified!</h1>
       <p>Your email has been successfully verified. You can now log in to your account.</p>
       <p>Redirecting you to the app...</p>
-      <a href="yourapp://" class="button">Open App</a>
+      <a href="voicesradio://" class="button">Open App</a>
     </div>
     
     <!-- Error State -->
@@ -120,7 +120,7 @@
       <div class="icon error">✕</div>
       <h1>Verification Failed</h1>
       <p id="error-message">The verification link may have expired or is invalid.</p>
-      <a href="yourapp://resend-verification" class="button">Try Again</a>
+      <a href="voicesradio://resend-verification" class="button">Try Again</a>
     </div>
   </div>
   
@@ -156,7 +156,7 @@
           // Try to redirect to app after a delay
           setTimeout(() => {
             // Try deep linking to the app
-            window.location.href = 'yourapp://verify-success';
+            window.location.href = 'voicesradio://verify-success';
           }, 2000);
         } else {
           showError(data.message || 'Verification failed. Please try again.');
