@@ -141,25 +141,24 @@
     
     async function verifyEmail(token) {
       try {
-        // Use the current origin or your production API URL
-        const apiUrl = '/api/auth/verify-email/' + token;
-        
-        const response = await fetch(apiUrl, {
+        const response = await fetch('http://192.168.0.7:4000/api/auth/verify-email/' + token, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
           }
         });
         
+        const data = await response.json();
+        
         if (response.ok) {
           showSuccess();
           
-          // Redirect to app after a delay
+          // Try to redirect to app after a delay
           setTimeout(() => {
+            // Try deep linking to the app
             window.location.href = 'voicesradio://verify-success';
           }, 2000);
         } else {
-          const data = await response.json();
           showError(data.message || 'Verification failed. Please try again.');
         }
       } catch (error) {
