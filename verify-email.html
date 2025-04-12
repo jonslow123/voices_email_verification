@@ -126,10 +126,23 @@
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Get token from URL
+      // Check for success/error parameters first
       const urlParams = new URLSearchParams(window.location.search);
-      const token = urlParams.get('token');
+      const success = urlParams.get('success');
+      const error = urlParams.get('error');
       
+      if (success === 'true') {
+        showSuccess();
+        return;
+      }
+      
+      if (error) {
+        showError('Verification failed. Please try again.');
+        return;
+      }
+      
+      // If no success/error params, look for token
+      const token = urlParams.get('token');
       if (!token) {
         showError('No verification token provided.');
         return;
@@ -171,6 +184,14 @@
       document.getElementById('loading-state').classList.add('hidden');
       document.getElementById('success-state').classList.remove('hidden');
       document.getElementById('error-state').classList.add('hidden');
+      
+      // Attempt to open the app immediately
+      window.location.href = 'voicesradio://verify-success';
+      
+      // If the app doesn't open after a short delay, show the "Open App" button
+      setTimeout(() => {
+        document.getElementById('success-state').querySelector('.button').style.display = 'inline-block';
+      }, 1000);
     }
     
     function showError(message) {
