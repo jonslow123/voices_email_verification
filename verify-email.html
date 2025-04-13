@@ -133,6 +133,8 @@
       
       if (success === 'true') {
         showSuccess();
+        // Attempt to open the app immediately
+        window.location.href = 'voicesradio://verify-success';
         return;
       }
       
@@ -185,7 +187,7 @@
       document.getElementById('success-state').classList.remove('hidden');
       document.getElementById('error-state').classList.add('hidden');
       
-      // Attempt to open the app immediately
+      // Try to open the app immediately
       window.location.href = 'voicesradio://verify-success';
       
       // If the app doesn't open after a short delay, show the "Open App" button
