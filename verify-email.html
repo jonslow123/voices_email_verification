@@ -111,8 +111,13 @@
       <div class="icon success">✓</div>
       <h1>Email Verified!</h1>
       <p>Your email has been successfully verified. You can now log in to your account.</p>
-      <p>Redirecting you to the app...</p>
-      <a href="voicesradio://" class="button">Open App</a>
+      <div class="button-container" style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+        <a href="voicesradio://verify-success" class="button">Open Voices Radio App</a>
+        <!-- Add App Store option as fallback -->
+        <a href="https://apps.apple.com/app/your-app-id" class="button" style="background-color: #007AFF;">Get on App Store</a>
+        <!-- Add web fallback if applicable -->
+        <a href="https://voicesradio.co.uk" class="button" style="background-color: #444;">Visit Website</a>
+      </div>
     </div>
     
     <!-- Error State -->
@@ -133,8 +138,6 @@
       
       if (success === 'true') {
         showSuccess();
-        // Attempt to open the app immediately
-        window.location.href = 'voicesradio://verify-success';
         return;
       }
       
@@ -167,12 +170,6 @@
         
         if (response.ok) {
           showSuccess();
-          
-          // Try to redirect to app after a delay
-          setTimeout(() => {
-            // Try deep linking to the app
-            window.location.href = 'voicesradio://verify-success';
-          }, 2000);
         } else {
           showError(data.message || 'Verification failed. Please try again.');
         }
@@ -187,13 +184,8 @@
       document.getElementById('success-state').classList.remove('hidden');
       document.getElementById('error-state').classList.add('hidden');
       
-      // Try to open the app immediately
-      window.location.href = 'voicesradio://verify-success';
-      
-      // If the app doesn't open after a short delay, show the "Open App" button
-      setTimeout(() => {
-        document.getElementById('success-state').querySelector('.button').style.display = 'inline-block';
-      }, 1000);
+      // Just show the button immediately
+      document.getElementById('success-state').querySelector('.button').style.display = 'inline-block';
     }
     
     function showError(message) {
